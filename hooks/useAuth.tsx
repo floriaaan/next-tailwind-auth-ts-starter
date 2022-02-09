@@ -21,8 +21,6 @@ function AuthProvider({
   children: React.ReactNode;
 }): JSX.Element {
   const [cookie, setCookie, removeCookie] = useCookies([USER_COOKIE_NAME]);
-
-  console.log(cookie);
   const [user, setUser] = useState<User | null>(
     cookie[USER_COOKIE_NAME] || null
   );
