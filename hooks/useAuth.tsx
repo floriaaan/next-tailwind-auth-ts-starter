@@ -21,6 +21,8 @@ function AuthProvider({
   children: React.ReactNode;
 }): JSX.Element {
   const [cookie, setCookie, removeCookie] = useCookies([USER_COOKIE_NAME]);
+
+  console.log(cookie);
   const [user, setUser] = useState<User | null>(
     cookie[USER_COOKIE_NAME] || null
   );
@@ -33,15 +35,14 @@ function AuthProvider({
     return lastUrl;
   };
 
+  /**
+   * TODO:
+   * - Implement sign in
+   * - Set user
+   * - Set cookie
+   * - Redirect to last url
+   */
   const signIn = async (email: string, password: string) => {
-    /**
-     * TODO:
-     * - Implement sign in
-     * - Set user
-     * - Set cookie
-     * - Redirect to last url
-     */
-
     let userDataFromApi: User = {
       _id: "randomId",
       uid: "randomId",
@@ -59,36 +60,34 @@ function AuthProvider({
     router.push(getLastUrl());
   };
 
+  /**
+   * TODO:
+   * - Implement sign out
+   * - Remove user
+   * - Remove cookie
+   * - Redirect to index
+   */
   const signOut = async () => {
-    /**
-     * TODO:
-     * - Implement sign out
-     * - Remove user
-     * - Remove cookie
-     * - Redirect to index
-     */
-
     setUser(null);
 
-    setCookie(USER_COOKIE_NAME, null, { path: "/" });
+    removeCookie(USER_COOKIE_NAME);
 
     router.push("/");
   };
 
+  /**
+   * TODO:
+   * - Implement register
+   * - Set user
+   * - Set cookie
+   * - Redirect to index
+   */
   const register = async (
     email: string,
     password: string,
     fullName: string,
     photoURL?: string
   ) => {
-    /**
-     * TODO:
-     * - Implement register
-     * - Set user
-     * - Set cookie
-     * - Redirect to index
-     */
-
     let userDataFromApi: User = {
       _id: "randomId",
       uid: "randomId",
