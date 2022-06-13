@@ -1,8 +1,10 @@
 image: node:alpine
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
+    - .next/cache/
 
 stages:
   - setup
@@ -19,6 +21,7 @@ build:
   artifacts:
     paths:
       - .next/
+    expire_in: 1 day
 
 test:
   stage: test
