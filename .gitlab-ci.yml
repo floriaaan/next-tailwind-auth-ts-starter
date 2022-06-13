@@ -23,12 +23,12 @@ build:
       - .next/
     expire_in: 1 day
 
-test:e2e:
+test-e2e:
   stage: test
 
   image: mcr.microsoft.com/playwright:v1.22.0-focal
   script: npm run test:e2e
   
-test:unit:
+test-unit:
   stage: test
   script: echo "unit tests"
