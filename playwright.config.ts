@@ -4,7 +4,7 @@ import path from "path";
 // Reference: https://playwright.dev/docs/test-configuration
 const config: PlaywrightTestConfig = {
   testDir: path.join(__dirname, "e2e"),
-  outputDir: "test-results/",
+  outputDir: "test-reports/",
 
   webServer: {
     command: "npm run dev",

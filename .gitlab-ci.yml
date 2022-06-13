@@ -28,6 +28,11 @@ test-e2e:
 
   image: mcr.microsoft.com/playwright:v1.22.0-focal
   script: npm run test:e2e
+  artifacts:
+    when: always
+    paths:
+      - test-reports/
+    expire_in: 1 day
 
 test-unit:
   stage: test
