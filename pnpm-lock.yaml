@@ -12,6 +12,7 @@ specifiers:
   eslint-config-next: 12.0.10
   next: 12.1.0
   next-themes: ^0.1.1
+  playwright: ^1.22.2
   postcss: ^8.4.6
   prop-types: ^15.8.1
   react: 17.0.2
@@ -39,6 +40,7 @@ devDependencies:
   autoprefixer: 10.4.7_postcss@8.4.14
   eslint: 8.8.0
   eslint-config-next: 12.0.10_vazrbedh3kjbjaks74xvob5ley
+  playwright: 1.22.2
   postcss: 8.4.14
   prop-types: 15.8.1
   tailwindcss: 3.1.2
@@ -1748,6 +1750,21 @@ packages:
   /pify/2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /playwright-core/1.22.2:
+    resolution: {integrity: sha512-w/hc/Ld0RM4pmsNeE6aL/fPNWw8BWit2tg+TfqJ3+p59c6s3B6C8mXvXrIPmfQEobkcFDc+4KirNzOQ+uBSP1Q==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
+  /playwright/1.22.2:
+    resolution: {integrity: sha512-hUTpg7LytIl3/O4t0AQJS1V6hWsaSY5uZ7w1oCC8r3a1AQN5d6otIdCkiB3cbzgQkcMaRxisinjMFMVqZkybdQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      playwright-core: 1.22.2
     dev: true
 
   /postcss-import/14.1.0_postcss@8.4.14:

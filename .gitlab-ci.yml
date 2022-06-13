@@ -14,7 +14,7 @@ stages:
 setup:
   stage: setup
   script: npm install
- 
+
 build:
   stage: build
   script: npm run build
@@ -23,6 +23,12 @@ build:
       - .next/
     expire_in: 1 day
 
-# test:
-#   stage: test
-#   script: npm run test
+test:e2e:
+  stage: test
+
+  image: mcr.microsoft.com/playwright:v1.22.0-focal
+  script: npm run test:e2e
+  
+test:unit:
+  stage: test
+  script: echo "unit tests"

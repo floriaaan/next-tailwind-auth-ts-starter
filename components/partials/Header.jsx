@@ -25,7 +25,7 @@ function Header() {
             {/* Logo */}
             <Link href="/">
               <a className="block" aria-label="Cruip">
-                <svg
+              <svg
                   className="w-8 h-8"
                   viewBox="0 0 32 32"
                   xmlns="http://www.w3.org/2000/svg"
@@ -39,9 +39,11 @@ function Header() {
                       r="79.941%"
                       id="header-logo"
                     >
-                      <stop stopColor="#4FD1C5" offset="0%" />
-                      <stop stopColor="#81E6D9" offset="25.871%" />
-                      <stop stopColor="#338CF5" offset="100%" />
+                      <stop stopColor="#fecd01" offset="0%" />
+                      <stop stopColor="#ffae01" offset="12%" />
+                      <stop stopColor="#fe8e01" offset="25%" />
+                      <stop stopColor="#ff5500" offset="75%" />
+                      <stop stopColor="#fe0100" offset="100%" />
                     </radialGradient>
                   </defs>
                   <rect
