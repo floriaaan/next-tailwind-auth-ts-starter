@@ -7,7 +7,8 @@ const config: PlaywrightTestConfig = {
   outputDir: "test-reports/",
 
   webServer: {
-    command: "npm run dev",
+    command: "npm run dev --port=3001",
+    url: "http://localhost:3001/",
     port: 3001,
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
@@ -16,6 +17,7 @@ const config: PlaywrightTestConfig = {
 
   use: {
     trace: "on",
+    baseURL: "http://localhost:3001/",
   },
 
   projects: [
