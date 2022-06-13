@@ -9,7 +9,7 @@ cache:
 stages:
   - setup
   - build
-  - test
+  # - test
 
 setup:
   stage: setup
@@ -23,6 +23,6 @@ build:
       - .next/
     expire_in: 1 day
 
-test:
-  stage: test
-  script: npm run test
+# test:
+#   stage: test
+#   script: npm run test
