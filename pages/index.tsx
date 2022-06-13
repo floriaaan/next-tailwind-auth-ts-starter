@@ -1,14 +1,37 @@
-import type { NextPage } from "next";
+import React from 'react';
 
-const Home: NextPage = () => {
+import Header from '../components/partials/Header';
+import HeroHome from '../components/partials/HeroHome';
+import FeaturesHome from '../components/partials/Features';
+import FeaturesBlocks from '../components/partials/FeaturesBlocks';
+import Testimonials from '../components/partials/Testimonials';
+import Newsletter from '../components/partials/Newsletter';
+import Footer from '../components/partials/Footer';
+
+function Home() {
   return (
-    <div className="flex flex-col h-screen p-6 space-y-3 bg-white dark:bg-black">
-      <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
-        {process.env.NEXT_PUBLIC_APP_NAME} - Home
-      </h1>
+    <div className="flex flex-col min-h-screen overflow-hidden">
+
+      {/*  Site header */}
+      <Header />
+
+      {/*  Page content */}
+      <main className="flex-grow">
+
+        {/*  Page sections */}
+        <HeroHome />
+        <FeaturesHome />
+        <FeaturesBlocks />
+        <Testimonials />
+        <Newsletter />
+
+      </main>
+
+      {/*  Site footer */}
+      <Footer />
 
     </div>
   );
-};
+}
 
 export default Home;
