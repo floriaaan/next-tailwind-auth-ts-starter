@@ -1,15 +1,15 @@
 image: node:alpine
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-    - .next/cache/
+# cache:
+#   key: ${CI_COMMIT_REF_SLUG}
+#   paths:
+#     - node_modules/
+#     - .next/cache/
 
 stages:
   - setup
   - build
-  # - test
+  - test
 
 setup:
   stage: setup
