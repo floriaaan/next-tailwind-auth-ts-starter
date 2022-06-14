@@ -6,7 +6,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
-    // "test:e2e": "playwright test"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.3",
