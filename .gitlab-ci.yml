@@ -27,7 +27,9 @@ test-e2e:
   stage: test
 
   image: mcr.microsoft.com/playwright:v1.22.0-focal
-  script: npm run test:e2e
+  script:
+    - npm run dev --port=3001 & npx wait-on http://localhost:3001
+    - npm run test:e2e
   artifacts:
     when: always
     paths:

@@ -1,0 +1,62 @@
+- hosts: webservers
+
+- name: SERVER
+  hosts: webservers
+  remote_user: admin
+  become: true
+  become_method: sudo
+  gather_facts: false
+  vars:
+    node_version: 16.14.2
+
+  tasks:
+
+    - name: SERVER | Install dependencies
+      apt: name={{ item }} state=present
+      with_items:
+        - git
+        - curl
+        - gnupg
+        - nodejs
+        - npm
+
+
+    - name: NODE | Install "pm2" node.js package globally
+      community.general.npm:
+        name: pm2
+        global: yes
+
+    - name: GIT | Clone/Pull repo
+      git:
+        repo: "{{repository}}"
+        dest: /var/www
+      register: git_finished
+      vars:
+        repository: "https://gitlab.com/floriaaan/next-tailwind-auth-ts-starter"
+
+    - name: NODE | Install npm deps
+      shell: npm i
+      register: npm_finished
+      failed_when: '"ERR!" in npm_finished.stderr'
+      when: git_finished.changed
+      args:
+        chdir: /var/www
+
+    # - name: Create pm2 ecosystem file
+    #   template:
+    #     src: ./pm2.ecosystem.yml
+    #     dest: /var/www/pm2.ecosystem.yml
+    #   when: npm_finished.changed
+
+    # - name: NODE | Stop APP
+    #   shell: pm2 stop app
+    #   args:
+    #     chdir: /var/www
+    #   ignore_errors: yes
+
+    # - name: NODE | Start APP
+    #   shell: pm2 start server.js --name server
+    #   args:
+    #     chdir: /var/www
+    #   ignore_errors: yes
+    #   when: npm_finished.changed
