@@ -59,4 +59,4 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
     - chmod 400 $SSH_KEY
   script:
-    - scp -i $SSH_KEY -r .next/ admin@$SSH_HOST:$SSH_PATH
+    - scp -i $SSH_KEY -r . admin@$SSH_HOST:$SSH_PATH
