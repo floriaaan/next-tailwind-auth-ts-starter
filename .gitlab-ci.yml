@@ -43,10 +43,10 @@ test-unit:
 
 deploy:
   stage: deploy
-  dependencies:
-    - build
-    - test-unit
-    - test-e2e
+  # dependencies:
+  #   - build
+  #   - test-unit
+  #   - test-e2e
 
   variables:
     SSH_HOST: "ec2-18-234-128-135.compute-1.amazonaws.com"
