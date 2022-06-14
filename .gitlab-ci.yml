@@ -7,10 +7,10 @@ cache:
     - .next/cache/
 
 stages:
+  - deploy
   - setup
   - build
   - test
-  - deploy
 
 setup:
   stage: setup
@@ -59,4 +59,5 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
     - chmod 400 $SSH_KEY
   script:
+    - rm -rf node_modules
     - scp -i $SSH_KEY -r . admin@$SSH_HOST:$SSH_PATH
