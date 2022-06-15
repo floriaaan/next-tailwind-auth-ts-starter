@@ -7,22 +7,33 @@ cache:
     - .next/cache/
 
 stages:
-  - deploy
   - setup
   - build
   - test
+  - deploy
 
 setup:
   stage: setup
   script: npm install
 
-build:
+build-next:
   stage: build
   script: npm run build
   artifacts:
     paths:
       - .next/
     expire_in: 1 day
+
+build-docker:
+  stage: build
+  image: docker:20.10.10
+  services:
+    - docker:20.10.10-dind
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker build -t $CI_REGISTRY_IMAGE .
+    - docker push $CI_REGISTRY_IMAGE
+
 
 test-e2e:
   stage: test
@@ -55,7 +66,7 @@ deploy:
     - 'which ssh-agent || (apk add openssh-client)'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
-    - ssh-keyscan ec2-18-234-128-135.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+    - ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
     - chmod 400 $SSH_KEY
   script:
