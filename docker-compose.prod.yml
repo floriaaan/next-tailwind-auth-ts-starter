@@ -1,5 +1,5 @@
 services:  
-  next:
+  nodejs:
     image: registry.gitlab.com/floriaaan/next-tailwind-auth-ts-starter:latest
     ports:
       - "80:3000"
