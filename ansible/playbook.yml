@@ -33,6 +33,7 @@
       register: git_finished
       vars:
         repository: "https://gitlab.com/floriaaan/next-tailwind-auth-ts-starter"
+      ignore_errors: yes
 
     - name: NODE | Install npm deps
       shell: npm i
@@ -42,21 +43,60 @@
       args:
         chdir: /var/www
 
-    # - name: Create pm2 ecosystem file
-    #   template:
-    #     src: ./pm2.ecosystem.yml
-    #     dest: /var/www/pm2.ecosystem.yml
-    #   when: npm_finished.changed
+    - name: DOCKER | Install docker packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+      tags:
+        - docker
 
-    # - name: NODE | Stop APP
-    #   shell: pm2 stop app
-    #   args:
-    #     chdir: /var/www
-    #   ignore_errors: yes
+    - name: DOCKER | Add Docker s official GPG key
 
-    # - name: NODE | Start APP
-    #   shell: pm2 start server.js --name server
-    #   args:
-    #     chdir: /var/www
-    #   ignore_errors: yes
-    #   when: npm_finished.changed
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+      tags:
+        - docker
+
+
+    - name: DOCKER | Set up the stable repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+        state: present
+        update_cache: yes
+      tags:
+        - docker
+
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+      tags:
+        - docker
+
+    - name: DOCKER | Install docker
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: yes
+      tags:
+        - docker
+
+    - name: DOCKER | Add remote "admin" user to "docker" group
+      user:
+        name: "admin"
+        group: "docker"
+        append: yes
+      tags:
+        - docker
+
+    - name: DOCKER | Install docker-compose
+      get_url: 
+        url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'u+x,g+x'
