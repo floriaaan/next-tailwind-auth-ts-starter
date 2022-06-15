@@ -1,5 +1,3 @@
-version: "3.3"
-
 services:  
   next:
     image: registry.gitlab.com/floriaaan/next-tailwind-auth-ts-starter:latest
