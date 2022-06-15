@@ -91,6 +91,6 @@ deploy-docker:
     - chmod 400 $SSH_KEY
   script:
     - scp -i $SSH_KEY -r docker-compose.prod.yml admin@$SSH_HOST:$SSH_PATH
-    - ssh -i $SSH_KEY admin@$SSH_HOST "cd $SSH_PATH && docker-compose up -d"
+    - ssh -i $SSH_KEY admin@$SSH_HOST "cd $SSH_PATH && sudo docker-compose up -d"
 
   
